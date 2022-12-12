@@ -4,17 +4,30 @@
 
 1. Copy `.env.example` to `.env`
 2. Add `OPEN_AI_KEY` to the `.env` file
+
 ```
 OPENAI_API_KEY=<YOUR KEY HERE>
 ```
+
 3. Install and run
+
 ```
-npm install
-npm run dev
+yarn
+yarn dev
 ```
 
+## Deploy
 
-## T3 Stack 
+Deploy to fly.io
+
+1. Create fly account
+2. Download fly cli `brew install flyctl`
+3. Run Fly Launch `flyctl launch`
+4. update fly.toml internal port to 3000
+5. `fly deploy`
+6. `fly secrets set --app gpt3-chat TWILIO_ACCOUNT_SID= TWILIO_AUTH_TOKEN= TWILIO_PHONE_NUMBER= OPENAI_API_KEY= etc...`
+
+## T3 Stack
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
