@@ -1,4 +1,5 @@
 # Nextjs Chat bot starter with basic ui and server
+<img width="1507" alt="Screen Shot 2022-12-12 at 5 23 58 PM" src="https://user-images.githubusercontent.com/5430709/207168087-74e9e2dc-637d-4edd-80de-e10cc1d7a7d6.png">
 
 ## Getting started
 
