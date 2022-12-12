@@ -1,4 +1,20 @@
-# Create T3 App
+# Nextjs Chat bot starter with basic ui and server
+
+## Getting started
+
+1. Copy `.env.example` to `.env`
+2. Add `OPEN_AI_KEY` to the `.env` file
+```
+OPENAI_API_KEY=<YOUR KEY HERE>
+```
+3. Install and run
+```
+npm install
+npm run dev
+```
+
+
+## T3 Stack 
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
