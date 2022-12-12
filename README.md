@@ -9,7 +9,15 @@
 OPENAI_API_KEY=<YOUR KEY HERE>
 ```
 
-3. Install and run
+3. Generate and add NEXTAUTH_SECRET to `.env` file
+
+```
+# Next Auth
+# You can generate the secret via 'openssl rand -base64 32' on Linux
+NEXTAUTH_SECRET=
+```
+
+4. Install and run
 
 ```
 yarn
@@ -25,7 +33,7 @@ Deploy to fly.io
 3. Run Fly Launch `flyctl launch`
 4. update fly.toml internal port to 3000
 5. `fly secrets set --app gpt3-chat TWILIO_ACCOUNT_SID= TWILIO_AUTH_TOKEN= TWILIO_PHONE_NUMBER= OPENAI_API_KEY= etc...`
-6. `fly deploy`
+6. `fly deploy --local-only`
 
 ## T3 Stack
 
