@@ -17,6 +17,7 @@ const Home: NextPage = () => {
           <div className="flex h-full flex-col items-center justify-between">
             <div className="pt-4">
               <span className="text-xl-4 font-semibold">Chat Bot Starter</span>
+              <input type="text" id="last_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required/>
             </div>
             <div className="py-4">
               <ThemeSelect />

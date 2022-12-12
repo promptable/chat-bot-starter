@@ -114,15 +114,15 @@ function formatPromptText(chatHistory: ChatHistory, promptTemplate: string) {
 }
 
 export const getReply = async (
+  userId: string,
   message: string,
-  phoneNumber: string
 ): Promise<OpenAIResponse> => {
-  console.log("Number", phoneNumber, "Message", message.trim());
+  console.log("userId", userId, "message", message);
   // strip whitespace!
   message = message.trim();
-  getOrCreateChatHistory(phoneNumber, message);
-  store.add(phoneNumber, message, "User");
-  const chatHistory = store.get(phoneNumber);
+  getOrCreateChatHistory(userId, message);
+  store.add(userId, message, "User");
+  const chatHistory = store.get(userId);
   if (!chatHistory) {
     throw new Error("Chat history should exist!");
   }
@@ -150,9 +150,22 @@ export const getReply = async (
   const agentText =
     response.data.choices[0]?.text?.trim() ||
     "Sorry, I had a problem. Please try again.";
-  store.add(phoneNumber, agentText, chatHistory.agentName);
+  store.add(userId, agentText, chatHistory.agentName);
   console.log(`${chatHistory.agentName}: ${agentText}`);
   return {
     text: agentText,
   } as OpenAIResponse;
+};
+
+/*
+  Clear the chat history for a userId
+*/
+export const clearChatHistory = async (
+  userId: string,
+): Promise<any> => {
+  console.log("userId", userId, "resetting");
+  getOrCreateChatHistory(userId, "reset");
+  return {
+    status: "ok",
+  };
 };

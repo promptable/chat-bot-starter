@@ -45,6 +45,8 @@ export default function Chat() {
   // ref to track text area and scroll text into view
   const ref = useRef<HTMLParagraphElement | null>(null);
 
+  const [userId, setUserId] = useState("bfortuner");
+
   const handleScroll = useCallback(() => {
     if (ref.current) {
       scrollToBottom(ref.current);
@@ -57,32 +59,47 @@ export default function Chat() {
     handleScroll();
   }, [messages, handleScroll]);
 
-  const [input, setInput] = useState("");
+  const [userInput, setUserInput] = useState("");
 
-  const getChat = async (input: string) => {
+  const getAgentReply = async (userData: any) => {
     return await fetch("/api/chat", {
       method: "POST",
       body: JSON.stringify({
-        Body: input,
+        Body: {
+          userId: userData.userId,
+          messageText: userData.userText,
+        }
+      }),
+    });
+  };
+
+  const clearChatHistory = async (userData: any) => {
+    return await fetch("/api/clear", {
+      method: "POST",
+      body: JSON.stringify({
+        Body: {
+          userId: userData.userId,
+        }
       }),
     });
   };
 
   // Mutations
-  const { mutateAsync } = useMutation(getChat);
+  const getAgentReplyMutation = useMutation(getAgentReply);
+  const clearChatHistoryMutation = useMutation(clearChatHistory);
 
   const submit = async () => {
     setMessages((prevMessages) => {
       return [
         ...prevMessages,
-        createMessage(input, true),
+        createMessage(userInput, true),
         createMessage("", false),
       ];
     });
 
-    const textInput = input;
-    setInput("");
-    const response = await mutateAsync(textInput);
+    const userText = userInput;
+    setUserInput("");
+    const response = await getAgentReplyMutation.mutateAsync({userId, userText});
 
     handleScroll();
 
@@ -99,8 +116,11 @@ export default function Chat() {
     }
   };
 
-  const handleClear = () => {
+  const handleClear = async () => {
     setMessages([]);
+    const response = await clearChatHistoryMutation.mutateAsync({userId});
+    const jsonblob = await response.json();
+    console.log("Clear Response", jsonblob);
   };
 
   return (
@@ -134,8 +154,8 @@ export default function Chat() {
             "scroll m-0 box-border resize-none border-none bg-transparent hover:ring-2",
             "min-w-none p max-w-none"
           )}
-          onChange={(e) => setInput(e.target.value)}
-          value={input}
+          onChange={(e) => setUserInput(e.target.value)}
+          value={userInput}
         />
         <button
           onClick={() => submit()}
