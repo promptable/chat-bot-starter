@@ -24,8 +24,8 @@ Deploy to fly.io
 2. Download fly cli `brew install flyctl`
 3. Run Fly Launch `flyctl launch`
 4. update fly.toml internal port to 3000
-5. `fly deploy`
-6. `fly secrets set --app gpt3-chat TWILIO_ACCOUNT_SID= TWILIO_AUTH_TOKEN= TWILIO_PHONE_NUMBER= OPENAI_API_KEY= etc...`
+5. `fly secrets set --app gpt3-chat TWILIO_ACCOUNT_SID= TWILIO_AUTH_TOKEN= TWILIO_PHONE_NUMBER= OPENAI_API_KEY= etc...`
+6. `fly deploy`
 
 ## T3 Stack
 
