@@ -55,7 +55,7 @@ function injectValuesIntoPrompt(
 }
 
 /*
- * If the message is "reset" or "reset <promptId> <agentName>", then reset the chat history
+ * If the message is "reset" or "reset <promptId>", then reset the chat history
  * and return the new chat history. Otherwise, return null.
  */
 function handlePossibleReset(
@@ -64,16 +64,14 @@ function handlePossibleReset(
 ): ChatHistory | undefined {
   if (message.trim().toLowerCase() === "reset") {
     const promptId = DEFAULT_PROMPT_ID;
-    const agentName = DEFAULT_AGENT_NAME;
-    store.create(userId, agentName, promptId);
+    store.create(userId, promptId);
     return store.get(userId);
   }
-  const pattern = /reset (\w+) (\w+)/;
+  const pattern = /reset (\w+)/;
   const match = message.toLowerCase().match(pattern);
   if (match) {
     const promptId = match[1]!;
-    const agentName = match[2]!;
-    store.create(userId, agentName, promptId);
+    store.create(userId, promptId);
     return store.get(userId);
   }
 
@@ -88,7 +86,7 @@ function getOrCreateChatHistory(userId: string, message: string) {
   if (chatHistory == null) {
     chatHistory = store.get(userId);
     if (chatHistory == null) {
-      chatHistory = store.create(userId, DEFAULT_AGENT_NAME, DEFAULT_PROMPT_ID);
+      chatHistory = store.create(userId, DEFAULT_PROMPT_ID);
     }
   } else {
     console.log("RESETTING CHAT HISTORY!");
@@ -150,8 +148,8 @@ export const getReply = async (
   const agentText =
     response.data.choices[0]?.text?.trim() ||
     "Sorry, I had a problem. Please try again.";
-  store.add(userId, agentText, chatHistory.agentName);
-  console.log(`${chatHistory.agentName}: ${agentText}`);
+  store.add(userId, agentText, DEFAULT_AGENT_NAME);
+  console.log(`${DEFAULT_AGENT_NAME}: ${agentText}`);
   return {
     text: agentText,
   } as OpenAIResponse;
