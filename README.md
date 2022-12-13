@@ -1,5 +1,6 @@
 # ChatGPT Web App with React/Next.js
-<img width="1507" alt="Screen Shot 2022-12-12 at 5 23 58 PM" src="https://user-images.githubusercontent.com/5430709/207168087-74e9e2dc-637d-4edd-80de-e10cc1d7a7d6.png">
+<img width="1342" alt="Screen Shot 2022-12-13 at 11 25 51 AM" src="https://user-images.githubusercontent.com/5430709/207388600-c59370c8-36e0-4c13-80e5-d355ebfbc07c.png">
+
 
 ## Getting started
 
