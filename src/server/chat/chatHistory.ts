@@ -4,7 +4,7 @@
 promptId is a Promptable.ai thing. If you're using your own local prompt,
 you can just hard-code the promptId (which is used to identify the prompt)
 if you want to reset/switch between prompts in the chat using the 
-"reset <promptId> <agentName>" command.
+"reset <promptId>" command.
 
 */
 
@@ -14,7 +14,6 @@ export type Turn = {
 };
 
 export interface ChatHistory {
-  agentName: string;
   promptId: string;
   userId: string;
   turns: Turn[];
@@ -25,11 +24,9 @@ export class ChatHistoryStore {
 
   create(
     userId: string,
-    agentName: string,
     promptId: string
   ): ChatHistory | undefined {
     this.history[userId] = {
-      agentName: agentName,
       promptId: promptId,
       userId: userId,
       turns: [],
