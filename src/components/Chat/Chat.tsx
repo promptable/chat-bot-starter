@@ -7,6 +7,7 @@ import { scrollToBottom } from "../../utils/scrollToBottom";
 import { v4 as uuid } from "uuid";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation, useQueryClient } from "react-query";
+import { chatUserIdAtom } from "src/pages/_app";
 
 const supportedLanguages = [
   {
@@ -42,10 +43,10 @@ const createMessage = (text: string, isUserMessage: boolean): Message => {
 };
 
 export default function Chat() {
+  const userId = useAtomValue(chatUserIdAtom);
+
   // ref to track text area and scroll text into view
   const ref = useRef<HTMLParagraphElement | null>(null);
-
-  const [userId, setUserId] = useState("bfortuner");
 
   const handleScroll = useCallback(() => {
     if (ref.current) {
@@ -68,7 +69,7 @@ export default function Chat() {
         Body: {
           userId: userData.userId,
           messageText: userData.userText,
-        }
+        },
       }),
     });
   };
@@ -79,7 +80,7 @@ export default function Chat() {
       body: JSON.stringify({
         Body: {
           userId: userData.userId,
-        }
+        },
       }),
     });
   };
@@ -99,7 +100,10 @@ export default function Chat() {
 
     const userText = userInput;
     setUserInput("");
-    const response = await getAgentReplyMutation.mutateAsync({userId, userText});
+    const response = await getAgentReplyMutation.mutateAsync({
+      userId,
+      userText,
+    });
 
     handleScroll();
 
@@ -118,7 +122,7 @@ export default function Chat() {
 
   const handleClear = async () => {
     setMessages([]);
-    const response = await clearChatHistoryMutation.mutateAsync({userId});
+    const response = await clearChatHistoryMutation.mutateAsync({ userId });
     const jsonblob = await response.json();
     console.log("Clear Response", jsonblob);
   };

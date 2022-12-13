@@ -1,9 +1,13 @@
 import ThemeSelect from "@components/ui/Theme/ThemeSelect";
+import { useAtomValue } from "jotai";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Chat from "../components/Chat/Chat";
+import { chatUserIdAtom } from "./_app";
 
 const Home: NextPage = () => {
+  const userId = useAtomValue(chatUserIdAtom);
+
   return (
     <>
       <Head>
@@ -14,9 +18,12 @@ const Home: NextPage = () => {
       <main className="grid min-h-screen grid-cols-6">
         <div className="col-span-1 h-full border-r-[1px] bg-base-200">
           <div className="flex h-full flex-col items-center justify-between">
-            <div className="pt-4">
-              <span className="text-xl-4 font-semibold">Chat Bot Starter</span>
-              <input type="text" id="last_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required/>
+            <div className="px-2 pt-4">
+              <div className="text-xl-4 font-semibold">Chat Bot Starter</div>
+              <div className="whitespace-normal py-2">
+                <div>USER ID</div>
+                {userId}
+              </div>
             </div>
             <div className="py-4">
               <ThemeSelect />
