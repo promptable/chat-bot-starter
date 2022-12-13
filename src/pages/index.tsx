@@ -49,7 +49,10 @@ const Home: NextPage = () => {
                   onCancel={() => null}
                   placeHolder="Prompt Id"
                 />
-                <div className="">
+                <div
+                  className="daisy-tooltip daisy-tooltip-right"
+                  data-tip="Enter a Promptable PromptId from Deployments tab. https://promptable.ai"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
