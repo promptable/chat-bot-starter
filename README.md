@@ -1,6 +1,13 @@
 # ChatGPT Web App with React/Next.js (and Twilio SMS)
 <img width="1342" alt="Screen Shot 2022-12-13 at 11 25 51 AM" src="https://user-images.githubusercontent.com/5430709/207388600-c59370c8-36e0-4c13-80e5-d355ebfbc07c.png">
 
+
+## Join our discord!
+If you have any questions post them here! This is still a WIP.
+https://discord.gg/SYmACWTf6V
+
+
+
 ## Getting started
 
 1. Copy `.env.example` to `.env`
