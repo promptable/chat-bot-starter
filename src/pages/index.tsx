@@ -1,3 +1,4 @@
+import { AutoSaveInput } from "@components/ui/Theme/AutoSaveInput";
 import ThemeSelect from "@components/ui/Theme/ThemeSelect";
 import { useAtomValue } from "jotai";
 import { type NextPage } from "next";
@@ -7,6 +8,24 @@ import { chatUserIdAtom } from "./_app";
 
 const Home: NextPage = () => {
   const userId = useAtomValue(chatUserIdAtom);
+
+  const handleSubmit = async (value: string) => {
+    console.log("updating prompt id", value);
+    if (!value?.length) {
+      return;
+    }
+
+    // send reset to server
+    await fetch("/api/chat", {
+      method: "POST",
+      body: JSON.stringify({
+        Body: {
+          userId: userId,
+          messageText: `reset ${value}`,
+        },
+      }),
+    });
+  };
 
   return (
     <>
@@ -24,6 +43,11 @@ const Home: NextPage = () => {
                 <div>USER ID</div>
                 {userId}
               </div>
+              <AutoSaveInput
+                onSubmit={handleSubmit}
+                onCancel={() => null}
+                placeHolder="Prompt Id"
+              />
             </div>
             <div className="py-4">
               <ThemeSelect />
