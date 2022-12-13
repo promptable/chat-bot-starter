@@ -1,17 +1,21 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 
-import { prisma } from "../../server/db/client";
-
 import { twiml } from "twilio";
-import { getReply } from "../../server/chat/gpt3";
+import { clearChatHistory, getReply } from "../../server/chat/gpt3";
 
 const { MessagingResponse } = twiml;
-const chat = async (req: NextApiRequest, res: NextApiResponse) => {
+const handleTextMessage = async (req: NextApiRequest, res: NextApiResponse) => {
   const userMessage = req.body.Body;
+  console.log("userMessage", userMessage);
+  console.log("From/To", req.body.From, req.body.To);
   const response = new MessagingResponse();
   try {
-    const reply = await getReply(userMessage, req.body.From);
-    console.log("msg", req.body.From, req.body.To, req.body.Body);
+    let reply;
+    if (userMessage.trim().toLowerCase() === "reset") {
+      reply = await clearChatHistory(req.body.From);
+    } else {
+      reply = await getReply(req.body.From, userMessage);
+    }
     response.message(reply.text);
   } catch (error) {
     console.error(error);
@@ -22,4 +26,4 @@ const chat = async (req: NextApiRequest, res: NextApiResponse) => {
   res.send(response.toString());
 };
 
-export default chat;
+export default handleTextMessage;

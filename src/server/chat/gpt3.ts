@@ -59,36 +59,36 @@ function injectValuesIntoPrompt(
  * and return the new chat history. Otherwise, return null.
  */
 function handlePossibleReset(
-  phone: string,
+  userId: string,
   message: string
 ): ChatHistory | undefined {
   if (message.trim().toLowerCase() === "reset") {
     const promptId = DEFAULT_PROMPT_ID;
     const agentName = DEFAULT_AGENT_NAME;
-    store.create(phone, agentName, promptId);
-    return store.get(phone);
+    store.create(userId, agentName, promptId);
+    return store.get(userId);
   }
   const pattern = /reset (\w+) (\w+)/;
   const match = message.toLowerCase().match(pattern);
   if (match) {
     const promptId = match[1]!;
     const agentName = match[2]!;
-    store.create(phone, agentName, promptId);
-    return store.get(phone);
+    store.create(userId, agentName, promptId);
+    return store.get(userId);
   }
 
   return undefined;
 }
 
 /*
-  Get or create a chat history for a phone number
+  Get or create a chat history for a userId / phoneNumber
 */
-function getOrCreateChatHistory(phone: string, message: string) {
-  let chatHistory = handlePossibleReset(phone, message);
+function getOrCreateChatHistory(userId: string, message: string) {
+  let chatHistory = handlePossibleReset(userId, message);
   if (chatHistory == null) {
-    chatHistory = store.get(phone);
+    chatHistory = store.get(userId);
     if (chatHistory == null) {
-      chatHistory = store.create(phone, DEFAULT_AGENT_NAME, DEFAULT_PROMPT_ID);
+      chatHistory = store.create(userId, DEFAULT_AGENT_NAME, DEFAULT_PROMPT_ID);
     }
   } else {
     console.log("RESETTING CHAT HISTORY!");
@@ -166,6 +166,6 @@ export const clearChatHistory = async (
   console.log("userId", userId, "resetting");
   getOrCreateChatHistory(userId, "reset");
   return {
-    status: "ok",
+    text: "Conversation history cleared",
   };
 };

@@ -16,7 +16,7 @@ export type Turn = {
 export interface ChatHistory {
   agentName: string;
   promptId: string;
-  phone: string;
+  userId: string;
   turns: Turn[];
 }
 
@@ -24,28 +24,28 @@ export class ChatHistoryStore {
   private history: { [chatId: string]: ChatHistory } = {};
 
   create(
-    phone: string,
+    userId: string,
     agentName: string,
     promptId: string
   ): ChatHistory | undefined {
-    this.history[phone] = {
+    this.history[userId] = {
       agentName: agentName,
       promptId: promptId,
-      phone: phone,
+      userId: userId,
       turns: [],
     };
-    return this.history[phone];
+    return this.history[userId];
   }
 
-  add(phone: string, message: string, speaker: string) {
+  add(userId: string, message: string, speaker: string) {
     const turn = {
       speaker: speaker,
       text: message,
     };
-    this.history[phone]?.turns.push(turn);
+    this.history[userId]?.turns.push(turn);
   }
 
-  get(phone: string): ChatHistory | undefined {
-    return this.history[phone];
+  get(userId: string): ChatHistory | undefined {
+    return this.history[userId];
   }
 }

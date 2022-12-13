@@ -1,7 +1,6 @@
 import ThemeSelect from "@components/ui/Theme/ThemeSelect";
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import Chat from "../components/Chat/Chat";
 
 const Home: NextPage = () => {
