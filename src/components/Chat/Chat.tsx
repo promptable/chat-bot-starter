@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { useAtomValue } from "jotai";
-import { useSession } from "next-auth/react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { scrollToBottom } from "../../utils/scrollToBottom";

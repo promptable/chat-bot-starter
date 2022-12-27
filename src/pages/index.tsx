@@ -1,3 +1,5 @@
+"use client";
+
 import { AutoSaveInput } from "@components/ui/Theme/AutoSaveInput";
 import ThemeSelect from "@components/ui/Theme/ThemeSelect";
 import { useAtomValue } from "jotai";
@@ -7,6 +9,7 @@ import Chat from "../components/Chat/Chat";
 import { chatUserIdAtom } from "./_app";
 
 const Home: NextPage = () => {
+  console.log("Loggin home page");
   const userId = useAtomValue(chatUserIdAtom);
 
   const handleSubmit = async (value: string) => {

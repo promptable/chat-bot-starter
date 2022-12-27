@@ -10,7 +10,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@next-auth/prisma-adapter": "^1.0.5",
     "@prisma/client": "^4.5.0",
     "@tanstack/react-query": "^4.19.1",
     "@types/twilio": "^3.19.3",
@@ -18,8 +17,7 @@
     "daisyui": "^2.43.1",
     "gpt3-tokenizer": "^1.1.4",
     "jotai": "^1.11.2",
-    "next": "13.0.2",
-    "next-auth": "^4.18.3",
+    "next": "^13.1.1",
     "openai": "^3.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
