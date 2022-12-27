@@ -1,6 +1,12 @@
 # ChatGPT Web App with React/Next.js (and Twilio SMS)
 <img width="1342" alt="Screen Shot 2022-12-13 at 11 25 51 AM" src="https://user-images.githubusercontent.com/5430709/207388600-c59370c8-36e0-4c13-80e5-d355ebfbc07c.png">
 
+
+## Join our discord!
+If you have any questions post them here! This is still a WIP.
+https://discord.gg/SYmACWTf6V
+
+
 ## Getting started
 
 1. Copy `.env.example` to `.env`
@@ -35,6 +41,30 @@ Deploy to fly.io
 4. update fly.toml internal port to 3000
 5. `fly secrets set --app gpt3-chat TWILIO_ACCOUNT_SID= TWILIO_AUTH_TOKEN= TWILIO_PHONE_NUMBER= OPENAI_API_KEY= etc...`
 6. `fly deploy --local-only`
+
+
+## Custom Prompt for the chat bot. (Using the `PromptId`)
+
+This starter uses https://promptable.ai to fetch it's prompts.
+
+If you'd like to use your own prompts on Promptable, you can paste in a prompt id. (You can get your prompt id on the deployments tab)
+
+NOTE: To get the chat bot to work correctly, you'll have to add a {{input}} for the chat history like this.
+
+The bot will inject the chat history into a variable called {{input}} in your prompt.
+
+Example: (This is the default prompt btw)
+
+```
+Below is a conversation between a knowledgable, helpful, and witty AI assistant and a user, who has some questions about a topic.
+The AI assistant is able to answer the user's questions and provide additional information about the topic. The AI assistant is able to
+keep the conversation focused on the topic and provide relevant information to the user. The closer the AI agent can get to
+answering the user's questions, the more helpful the AI agent will be to the user.
+
+CHAT HISTORY:
+{{input}}
+Assistant:
+```
 
 ## T3 Stack
 
