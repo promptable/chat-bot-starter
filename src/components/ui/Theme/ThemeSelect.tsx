@@ -1,6 +1,7 @@
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
-export const themeAtom = atom<string | null>(null);
+export const themeAtom = atomWithStorage<string>("theme", "light");
 
 const daisyUIThemes = [
   "light",
@@ -37,10 +38,6 @@ const daisyUIThemes = [
 export default function ThemeSelect() {
   // Jotai state. It's like global useState <3
   const [theme, setTheme] = useAtom(themeAtom);
-
-  if (!theme) {
-    return null;
-  }
 
   return (
     <select
