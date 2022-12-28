@@ -11,6 +11,7 @@ import GPT3Tokenizer from "gpt3-tokenizer";
 import axios from "axios";
 import type { ChatHistory, Turn } from "./chatHistory";
 import { ChatHistoryStore } from "./chatHistory";
+import { PromptableApi } from "promptable";
 
 // AI ASSISTANT BOT:
 const DEFAULT_AGENT_NAME = "Assistant";
@@ -113,7 +114,7 @@ function formatPromptText(chatHistory: ChatHistory, promptTemplate: string) {
 
 export const getReply = async (
   userId: string,
-  message: string,
+  message: string
 ): Promise<OpenAIResponse> => {
   console.log("userId", userId, "message", message);
   // strip whitespace!
@@ -128,10 +129,9 @@ export const getReply = async (
 
   // Get the prompt and config from the Promptable API
   // (Optionally) replace this call with a local hard-coded prompt and config
-  const { data } = await axios.get(
-    `https://promptable.ai/api/prompt/${chatHistory.promptId}/deployment/active`
-  );
-  console.log(data);
+  const data = await PromptableApi.getActiveDeployment({
+    promptId: chatHistory.promptId,
+  });
 
   const prompt = formatPromptText(chatHistory, data.text);
   console.log("PROMPT", prompt);
@@ -144,6 +144,7 @@ export const getReply = async (
   };
   console.log(params);
   const response = await openai.createCompletion(params);
+
   console.log(response.data);
   const agentText =
     response.data.choices[0]?.text?.trim() ||
@@ -158,9 +159,7 @@ export const getReply = async (
 /*
   Clear the chat history for a userId
 */
-export const clearChatHistory = async (
-  userId: string,
-): Promise<any> => {
+export const clearChatHistory = async (userId: string): Promise<any> => {
   console.log("userId", userId, "resetting");
   getOrCreateChatHistory(userId, "reset");
   return {
