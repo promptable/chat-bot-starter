@@ -20,4 +20,4 @@ jobs:
       run: npm ci  # Use `npm install` if you don't have a package-lock.json
 
     - name: Lint with Prettier
-      run: npx prettier --check .  # Check if the code conforms to prettier formatting
+      run: npx prettier --check --list-different .  # Check if the code conforms to prettier formatting
