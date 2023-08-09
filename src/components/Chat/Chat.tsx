@@ -161,16 +161,12 @@ export default function Chat() {
           <div className="flex-grow overflow-y-scroll" ref={ref}>
             <ul>
               {messages?.map((msg) => {
-                return (
-                  <li key={msg.id} className="py-2">
-                    {msg.isUserMessage ? (
-                      <UserMessage msg={msg} />
-                    ) : (
-                      <BotMessage msg={msg} />
-                    )}
-                  </li>
-                );
-              })}
+  return (
+    <li key={msg.id} className="py-2">
+      <Message text={msg.text} isUserMessage={msg.isUserMessage} />
+    </li>
+  );
+})}
             </ul>
           </div>
           <div className="flex items-center space-x-2">
@@ -208,7 +204,7 @@ export default function Chat() {
 
 export const UserMessage = ({ msg }: { msg: Message }) => {
   return (
-    <div className="flex items-center space-x-8 py-10 px-40 text-xl">
+    <div className="user-message">
       <div className="daisy-placeholder daisy-avatar">
         <div className="daisy-mask daisy-mask-square w-8 bg-primary text-3xl font-black text-accent">
           {""}
@@ -221,7 +217,7 @@ export const UserMessage = ({ msg }: { msg: Message }) => {
 
 export const BotMessage = ({ msg }: { msg: Message }) => {
   return (
-    <div className="flex items-center space-x-8 border-y-2 bg-base-300 py-10 px-40 text-xl">
+    <div className="bot-message">
       <div className="daisy-placeholder daisy-avatar">
         <div className="daisy-mask daisy-mask-square w-8 bg-secondary text-3xl font-black text-accent"></div>
       </div>

@@ -10,4 +10,20 @@
   div#__next {
     @apply h-full;
   }
+
+  .user-message {
+    display: flex;
+    align-items: center;
+    padding: 2.5rem 10rem;
+    font-size: 1.25rem;
+  }
+  
+  .bot-message {
+    display: flex;
+    align-items: center;
+    border-top: 2px solid;
+    background-color: #f3f4f6;
+    padding: 2.5rem 10rem;
+    font-size: 1.25rem;
+  }
 }
