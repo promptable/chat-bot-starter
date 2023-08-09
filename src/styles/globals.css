@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
-    html,
+  html,
   body,
   body > div:first-child,
   div#__next {
     @apply h-full;
+  }
+
+  .user-message {
+    @apply flex items-center space-x-8 py-10 px-40 text-xl;
+  }
+  
+  .bot-message {
+    @apply flex items-center space-x-8 border-y-2 bg-base-300 py-10 px-40 text-xl;
   }
 }
