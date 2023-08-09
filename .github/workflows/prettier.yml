@@ -1,0 +1,23 @@
+name: Prettier Lint
+
+on: push
+
+jobs:
+  prettier-lint:
+    name: Prettier Lint
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # or any version you prefer
+
+    - name: Install Dependencies
+      run: npm ci  # Use `npm install` if you don't have a package-lock.json
+
+    - name: Lint with Prettier
+      run: npx prettier --check .  # Check if the code conforms to prettier formatting
