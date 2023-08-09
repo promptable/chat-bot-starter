@@ -175,30 +175,30 @@ export default function Chat() {
           </div>
           <div className="flex items-center space-x-2">
             <ReactTextareaAutosize
-              maxRows={5}
-              onKeyDown={handleKeyDown}
-              className={classNames(
-                "flex-grow resize-none rounded-md py-2 px-2 text-3xl shadow-xl outline outline-base-300",
-                "scroll m-0 box-border resize-none border-none bg-transparent hover:ring-2",
-                "min-w-none p max-w-none"
-              )}
-              onChange={(e) => setUserInput(e.target.value)}
-              value={userInput}
-            />
-            <button
-              disabled={!messages.length}
-              onClick={() => submit()}
-              className={classNames("daisy-btn-primary daisy-btn")}
-            >
-              Run
-            </button>
-            <button
-              disabled={!messages.length}
-              onClick={handleClear}
-              className={classNames("daisy-btn")}
-            >
-              Clear
-            </button>
+  maxRows={5}
+  onKeyDown={handleKeyDown}
+  className={classNames(
+    "flex-grow resize-none rounded-md py-2 px-2 text-3xl shadow-xl outline outline-base-300 lg:text-xl",
+    "scroll m-0 box-border resize-none border-none bg-transparent hover:ring-2",
+    "min-w-none p max-w-none"
+  )}
+  onChange={(e) => setUserInput(e.target.value)}
+  value={userInput}
+/>
+<button
+  disabled={!messages.length}
+  onClick={() => submit()}
+  className={classNames("daisy-btn-primary daisy-btn lg:p-1 lg:text-sm")}
+>
+  Run
+</button>
+<button
+  disabled={!messages.length}
+  onClick={handleClear}
+  className={classNames("daisy-btn lg:p-1 lg:text-sm")}
+>
+  Clear
+</button>
           </div>
         </div>
       </div>
@@ -206,32 +206,5 @@ export default function Chat() {
   );
 }
 
-export const UserMessage = ({ msg }: { msg: Message }) => {
-  return (
-    <div className="flex items-center space-x-8 py-10 px-40 text-xl">
-      <div className="daisy-placeholder daisy-avatar">
-        <div className="daisy-mask daisy-mask-square w-8 bg-primary text-3xl font-black text-accent">
-          {""}
-        </div>
-      </div>
-      <p>{msg.text}</p>
-    </div>
-  );
-};
-
-export const BotMessage = ({ msg }: { msg: Message }) => {
-  return (
-    <div className="flex items-center space-x-8 border-y-2 bg-base-300 py-10 px-40 text-xl">
-      <div className="daisy-placeholder daisy-avatar">
-        <div className="daisy-mask daisy-mask-square w-8 bg-secondary text-3xl font-black text-accent"></div>
-      </div>
-      <div className={classNames("rounded-md text-xl text-base-content")}>
-        {msg.text?.length ? (
-          msg.text.trim()
-        ) : (
-          <span className="">Loading...</span>
-        )}
-      </div>
-    </div>
-  );
-};
+import UserMessage from './UserMessage'; 
+import BotMessage from './BotMessage';
