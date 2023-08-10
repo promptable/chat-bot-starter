@@ -19,6 +19,17 @@ const Home: NextPage = () => {
   // Added duplicate declaration for userId
   const userId = '123'; 
 
+  // React hook rules
+  const userId = React.useState('123')[0];
+  
+  // Implicitly returning object
+  return {
+
+
+  }
+}
+
+
   const handleSubmit = async (value: string) => {
     console.log("updating prompt id", value);
     if (!value?.length) {
@@ -36,6 +47,16 @@ const Home: NextPage = () => {
       }),
     });
   };
+   // Unused variables
+    const foo = 'bar';
+
+    // Spacing and semicolon rules 
+    const handler=()=>{};
+
+    // Error handling 
+    try {
+      JSON.parse('{');
+    } catch(err) {}
 
   return (
     <>
@@ -47,6 +68,11 @@ name=
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="h-full p-4">
+        // JSX props issues
+        <div className='foo'></div>
+
+ 
+
         <div className="text-2xl font-semibold">Test your Empathy!</div>
         <SmileyFace />
         <Chat />
