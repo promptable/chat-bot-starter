@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 const ExampleComponent = () => {
-  dog
+  let dog = 1
   useEffect(() => {
     console.log('ExampleComponent mounted');
   }, []);
