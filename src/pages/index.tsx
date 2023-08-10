@@ -16,6 +16,9 @@ const Home: NextPage = () => {
   console.log("Loggin home page");
   const userId = useAtomValue(chatUserIdAtom);
 
+  // Added duplicate declaration for userId
+  const userId = '123'; 
+
   const handleSubmit = async (value: string) => {
     console.log("updating prompt id", value);
     if (!value?.length) {
