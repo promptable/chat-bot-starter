@@ -6,6 +6,7 @@ import { useAtomValue } from "jotai";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Chat from "../components/Chat/Chat";
+import SmileyFace from '../components/SmileyFace';
 import { chatUserIdAtom } from "./_app";
 
 const Home: NextPage = () => {
@@ -39,6 +40,7 @@ const Home: NextPage = () => {
       </Head>
       <main className="h-full p-4">
         <div className="text-2xl font-semibold">Test your Empathy!</div>
+        <SmileyFace />
         <Chat />
       </main>
     </>
