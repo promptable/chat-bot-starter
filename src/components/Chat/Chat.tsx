@@ -61,7 +61,7 @@ export default function Chat() {
 
   const [userInput, setUserInput] = useState("");
 
-  const getAgentReply = async (userData: any) => {
+  const getAgentReply = async (userData: UserData) => {
     return await fetch("/api/chat", {
       method: "POST",
       body: JSON.stringify({
@@ -74,7 +74,7 @@ export default function Chat() {
     });
   };
 
-  const clearChatHistory = async (userData: any) => {
+  const clearChatHistory = async (userData: UserData) => {
     return await fetch("/api/clear", {
       method: "POST",
       body: JSON.stringify({

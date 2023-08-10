@@ -1,4 +1,4 @@
-import { Message } from "./Chat";
+import type { Message } from "./Chat";
 import React, { useState } from 'react';
 import classNames from "classnames";
 interface BotMessageProps {

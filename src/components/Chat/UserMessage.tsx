@@ -1,4 +1,4 @@
-import { Message } from "./Chat";
+import type { Message } from "./Chat";
 import React from 'react';
 
 export const UserMessage = ({ msg }: { msg: Message }) => {
