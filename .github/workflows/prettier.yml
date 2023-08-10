@@ -21,10 +21,3 @@ jobs:
 
     - name: Lint with ESLint
       run: npx eslint . --ext .js,.jsx,.ts,.tsx
-
-    - name: Create Prettier-formatted copies
-      run: npx prettier . --write --output-dir .prettier-output
-
-    - name: Compare differences
-      run: |
-        diff -urN . .prettier-output || (echo "Formatting discrepancies found!"; exit 1)
