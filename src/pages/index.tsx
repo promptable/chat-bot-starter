@@ -9,6 +9,9 @@ import Chat from "../components/Chat/Chat";
 import SmileyFace from '../components/SmileyFace';
 import { chatUserIdAtom } from "./_app";
 
+// Added unused variable foo 
+const foo = 'foo';
+
 const Home: NextPage = () => {
   console.log("Loggin home page");
   const userId = useAtomValue(chatUserIdAtom);
