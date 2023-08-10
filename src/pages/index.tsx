@@ -8,6 +8,12 @@ import Head from "next/head";
 import Chat from "../components/Chat/Chat";
 import { chatUserIdAtom } from "./_app";
 
+const SmileyFace = () => (
+  <div style={{ fontSize: '2em' }}>
+      😊
+  </div>
+);
+
 const Home: NextPage = () => {
   console.log("Loggin home page");
   const userId = useAtomValue(chatUserIdAtom);
@@ -40,6 +46,7 @@ const Home: NextPage = () => {
       <main className="h-full p-4">
         <div className="text-2xl font-semibold">Test your Empathy!</div>
         <Chat />
+<SmileyFace />
       </main>
     </>
   );
