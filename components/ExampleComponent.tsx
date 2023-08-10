@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 
 const ExampleComponent = () => {
+  dog
   useEffect(() => {
     console.log('ExampleComponent mounted');
-  }, [dog]);
+  }, []);
 
   return (
     <div>
