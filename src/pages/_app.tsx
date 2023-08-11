@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect } from 'react';
 import { type AppType } from "next/app";
 import ThemeProvider from "@components/ui/Theme/ThemeProvider";
 import "../styles/globals.css";
@@ -12,11 +13,22 @@ const queryClient = new QueryClient();
 
 export const chatUserIdAtom = atom(uuid());
 
+const NewComponent = () => {
+  useEffect(() => {
+    console.log('Component mounted');
+    return () => {
+      console.log('Component unmounted');
+    };
+  }, []);
+  return <div>NewComponent loaded</div>;
+};
+
 const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
   return (
     // Provide the client to your App
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
+        <NewComponent />
         <Component {...pageProps} />
       </QueryClientProvider>
     </ThemeProvider>
