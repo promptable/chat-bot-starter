@@ -12,9 +12,15 @@ const queryClient = new QueryClient();
 
 export const chatUserIdAtom = atom(uuid());
 
+import React, { useEffect } from 'react';
+
 const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
+  // use effect hook to run code upon mounting of the component
+  useEffect(() => {
+    console.log("Component mounted");  // replace this with the intended code based on the later task
+  }, []);
+
   return (
-    // Provide the client to your App
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
