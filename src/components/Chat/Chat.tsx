@@ -7,8 +7,7 @@ import UserMessage from "../UserMessage";
 
 const supportedLanguages = 
 [
-  {
-    id: "py",
+  {-: "py",
     name: "python",
   },
   {
