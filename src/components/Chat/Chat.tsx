@@ -5,7 +5,8 @@ import { useMessages } from "../../hooks/useMessages";
 import BotMessage from "../BotMessage";
 import UserMessage from "../UserMessage";
 
-const supportedLanguages = [
+const supportedLanguages = 
+[
   {
     id: "py",
     name: "python",
