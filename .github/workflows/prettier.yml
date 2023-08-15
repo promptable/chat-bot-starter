@@ -23,17 +23,5 @@ jobs:
     - name: Install Dependencies
       run: npm ci
 
-    - name: Get list of files in this PR
-      id: get-changed-files
-      uses: lots0logs/gh-action-get-changed-files@2.1.4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Lint with ESLint
-      run: |
-        for file in ${{ steps.get-changed-files.outputs.all }}
-        do
-          if [[ $file == *.js || $file == *.jsx || $file == *.ts || $file == *.tsx ]]; then
-            npx eslint $file
-          fi
-        done
+      run: npx eslint 'src/**/*.{ts,tsx,js,jsx}'
