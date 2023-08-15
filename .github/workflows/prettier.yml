@@ -19,5 +19,5 @@ jobs:
     - name: Install Dependencies
       run: npm ci
 
-    - name: Lint with ESLint
-      run: npx eslint . --ext .js,.jsx,.ts,.tsx
+    - name: Lint with Prettier
+      run: npx prettier --check .
