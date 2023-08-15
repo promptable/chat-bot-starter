@@ -29,5 +29,7 @@ jobs:
       run: |
         for file in ${{ steps.get-changed-files.outputs.all }}
         do
-          npx eslint $file --ext .js,.jsx,.ts,.tsx
+          if [[ $file == *.js || $file == *.jsx || $file == *.ts || $file == *.tsx ]]; then
+            npx eslint $file
+          fi
         done
