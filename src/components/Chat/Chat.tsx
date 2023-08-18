@@ -41,7 +41,16 @@ const createMessage = (text: string, isUserMessage: boolean): Message => {
   };
 };
 
+// Implement the recursive function that sums an array of integers
+const recursiveArraySum = (arr: number[]): number => {
+  if (arr.length === 0) {
+    return 0;
+  }
+  return arr[0] + recursiveArraySum(arr.slice(1));   
+};
+
 export default function Chat() {
+
   const userId = useAtomValue(chatUserIdAtom);
 
   // ref to track text area and scroll text into view
