@@ -7,6 +7,8 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Chat from "../components/Chat/Chat";
 import { chatUserIdAtom } from "./_app";
+import TOS from '../components/TOS';
+
 
 const Home: NextPage = () => {
   console.log("Loggin home page");
@@ -40,6 +42,8 @@ const Home: NextPage = () => {
       <main className="h-full p-4">
         <div className="text-2xl font-semibold">Test your Empathy!</div>
         <Chat />
+<TOS />
+
       </main>
     </>
   );
