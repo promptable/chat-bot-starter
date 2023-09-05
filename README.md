@@ -7,7 +7,11 @@ If you have any questions post them here! This is still a WIP.
 https://discord.gg/SYmACWTf6V
 
 
+## Hello World
+Hello World! This is an introduction ...
+
 ## Getting started
+
 
 1. Copy `.env.example` to `.env`
 2. Add `OPEN_AI_KEY` to the `.env` file
