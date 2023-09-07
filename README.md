@@ -1,4 +1,4 @@
-🙂
+🙂 🌈
 
 # ChatGPT Web App with React/Next.js (and Twilio SMS)
 <img width="1342" alt="Screen Shot 2022-12-13 at 11 25 51 AM" src="https://user-images.githubusercontent.com/5430709/207388600-c59370c8-36e0-4c13-80e5-d355ebfbc07c.png">
