@@ -1,7 +1,12 @@
 import { env } from "../../env/server.mjs";
 import { type NextApiRequest, type NextApiResponse } from "next";
 import { PromptableApi } from "promptable";
-import { getReply } from "../../server/chat/gpt3";
+import { BOT_VERSION } from "../../server/chat/botConfig";
+import { getReply as getOriginalReply } from "../../server/chat/gpt3";
+import { getReply as getAlternateReply } from "../../server/chat/gpt3Alternate";
+
+const getReply = BOT_VERSION === 'original' ? getOriginalReply : getAlternateReply;
+
 import { Configuration, OpenAIApi } from "openai";
 
 export const EMPATHY_PROMPT_ID = "clcj71xae00a0i6eghu9v7xbo";
