@@ -1,6 +1,11 @@
 🙂 🌈
 
-# ChatGPT Web App with React/Next.js (and Twilio SMS)
+# Project Marketplace for Interns
+
+## Purpose
+This application serves as a marketplace for startups to post microinternships and projects. In this platform, interns get real-world experience as they deliver these projects. Each week, top-performing interns are recognized, building a vibrant, skills-oriented intern talent pool.
+
+
 <img width="1342" alt="Screen Shot 2022-12-13 at 11 25 51 AM" src="https://user-images.githubusercontent.com/5430709/207388600-c59370c8-36e0-4c13-80e5-d355ebfbc07c.png">
 
 
@@ -9,11 +14,8 @@ If you have any questions post them here! This is still a WIP.
 https://discord.gg/SYmACWTf6V
 
 
-## Getting started
-
-1. Copy `.env.example` to `.env`
-2. Add `OPEN_AI_KEY` to the `.env` file
-
+## Getting Started
+For detailed instructions on setting up the project, check the 'Setup Guide' section. Make sure to fill out the .env file with necessary credentials. For details of each environment variable, refer to the 'Environment Variables' section.
 ```
 OPENAI_API_KEY=<YOUR KEY HERE>
 ```
@@ -33,29 +35,11 @@ yarn
 yarn dev
 ```
 
-## Deploy
+## System Overview
+This application consists of a frontend and a backend system. The frontend is built with Next.js and Tailwind CSS. It handles rendering of the interface that users interact with. The backend handles requests from the frontend and interacts with the database. It is built with Express.js.
 
-Deploy to fly.io
-
-1. Create fly account
-2. Download fly cli `brew install flyctl`
-3. Run Fly Launch `flyctl launch`
-4. update fly.toml internal port to 3000
-5. `fly secrets set --app gpt3-chat TWILIO_ACCOUNT_SID= TWILIO_AUTH_TOKEN= TWILIO_PHONE_NUMBER= OPENAI_API_KEY= etc...`
-6. `fly deploy --local-only`
-
-
-## Custom Prompt for the chat bot. (Using the `PromptId`)
-
-This starter uses https://promptable.ai to fetch it's prompts.
-
-If you'd like to use your own prompts on Promptable, you can paste in a prompt id. (You can get your prompt id on the deployments tab)
-
-NOTE: To get the chat bot to work correctly, you'll have to add a {{input}} for the chat history like this.
-
-The bot will inject the chat history into a variable called {{input}} in your prompt.
-
-Example: (This is the default prompt btw)
+## Architecture
+The frontend and backend are separate entities. They communicate through APIs, with the backend offering RESTful APIs. The major API endpoints include '/api/projects' for projects-related functionalities, '/api/users' for handling user data, and '/api/auth' for authentication related tasks.
 
 ```
 Below is a conversation between a knowledgable, helpful, and witty AI assistant and a user, who has some questions about a topic.
@@ -68,52 +52,30 @@ CHAT HISTORY:
 Assistant:
 ```
 
-## T3 Stack
+## Functionalities
+The core features of this application include:
+- User registration and login
+- Project creation, update, and deletion
+- Browsing existing projects
+- Applying for projects
+- Reviewing applications for project owners
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-## What's next? How do I make an app with this?
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## User Guides
+We have several guides to help you make the most out of this project. They include how to setup your local development environment, how to deploy the application, and how to use the application as an intern, as a startup, or as a site administrator.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
+<!-- Removed content
 ## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
-
 
 ## SMS Support with Twilio (Optional)
 
-Twilio SMS chatbot using GPT3. Based on this [tutorial](https://www.twilio.com/blog/sms-stocks-bot-twilio-typescript).
-### Things you will need
+## GPT3 Example Integration
 
-* [Node.js](https://nodejs.org/en/) installed on your machine
-* A Twilio account (if you don't have one yet, [sign up for a free Twilio account here and receive $10 credit when you upgrade](https://twil.io/philnash))
-* A Twilio phone number that can receive SMS messages
-* [ngrok](https://ngrok.com/) so that you can [respond to webhooks in your local development environment](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html)
-* (Optional) A [Promptable](https://promptable.ai) account for creating / managing prompts.
-* (Optional) A Fly.io account for deploying the app
+## TODOs/ Feature Requests
 
-### Create a Twilio Account / Phone Number
-
-Based on this [tutorial](https://www.twilio.com/blog/sms-stocks-bot-twilio-typescript). After your account is created, use this command to create a phone number that can receive SMS messages:
-
+-->
 ```
 twilio phone-numbers:update PHONE_NUMBER --sms-url https://RANDOM_STRING.ngrok.io/messages
 ```
