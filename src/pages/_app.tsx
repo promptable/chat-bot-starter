@@ -1,6 +1,7 @@
 "use client";
 
 import { type AppType } from "next/app";
+import ProfileAvatar from '@components/ProfileAvatar';
 import ThemeProvider from "@components/ui/Theme/ThemeProvider";
 import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -17,6 +18,7 @@ const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
     // Provide the client to your App
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
+        <ProfileAvatar />
         <Component {...pageProps} />
       </QueryClientProvider>
     </ThemeProvider>
