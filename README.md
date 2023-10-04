@@ -1,10 +1,5 @@
 🙂 🌈
 
-# Project Marketplace for Interns
-
-## Purpose
-This application serves as a marketplace for startups to post microinternships and projects. In this platform, interns get real-world experience as they deliver these projects. Each week, top-performing interns are recognized, building a vibrant, skills-oriented intern talent pool.
-
 
 <img width="1342" alt="Screen Shot 2022-12-13 at 11 25 51 AM" src="https://user-images.githubusercontent.com/5430709/207388600-c59370c8-36e0-4c13-80e5-d355ebfbc07c.png">
 
