@@ -91,7 +91,8 @@ export default function Chat() {
 
   const [empathy, setEmpathy] = useState<string | null>(null);
   const submit = async () => {
-    console.log("messages", messages);
+    console.log("\ud83d\ude03 messages", messages);
+    
     const prevMessage = messages[messages.length - 1]?.text;
     setMessages((prevMessages) => {
       return [...prevMessages, createMessage(userInput, true)];
