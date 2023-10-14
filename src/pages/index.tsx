@@ -39,7 +39,9 @@ const Home: NextPage = () => {
       </Head>
       <main className="h-full p-4">
         <div className="text-2xl font-semibold">Test your Empathy!</div>
+        <Link href="/faq">Go to FAQ</Link>
         <Chat />
+        
       </main>
     </>
   );
