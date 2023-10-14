@@ -1,16 +1,14 @@
 import classNames from "classnames";
-import { useAtomValue } from "jotai";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
-import { scrollToBottom } from "../../utils/scrollToBottom";
-import { v4 as uuid } from "uuid";
-import { useQuery } from "@tanstack/react-query";
-import { useMutation, useQueryClient } from "react-query";
-import { chatUserIdAtom } from "src/pages/_app";
+import { useMessages } from "../../hooks/useMessages";
+import BotMessage from "../BotMessage";
+import UserMessage from "../UserMessage";
 
-const supportedLanguages = [
-  {
-    id: "py",
+
+const supportedLanguages = 
+[
+  {id: "py",
     name: "python",
   },
   {
@@ -27,128 +25,15 @@ const supportedLanguages = [
   },
 ];
 
-interface Message {
-  isUserMessage: boolean;
-  text: string;
-  id: string;
-}
-
-const createMessage = (text: string, isUserMessage: boolean): Message => {
-  return {
-    isUserMessage,
-    text,
-    id: uuid(),
-  };
-};
-
 export default function Chat() {
-  const userId = useAtomValue(chatUserIdAtom);
-
-  // ref to track text area and scroll text into view
-  const ref = useRef<HTMLParagraphElement | null>(null);
-
-  const handleScroll = useCallback(() => {
-    if (ref.current) {
-      scrollToBottom(ref.current);
-    }
-  }, []);
-
-  const [messages, setMessages] = useState<Message[]>([]);
-
-  useEffect(() => {
-    handleScroll();
-  }, [messages, handleScroll]);
-
-  const [userInput, setUserInput] = useState("");
-
-  const getAgentReply = async (userData: any) => {
-    return await fetch("/api/chat", {
-      method: "POST",
-      body: JSON.stringify({
-        Body: {
-          userId: userData.userId,
-          messageText: userData.userText,
-          prevMessage: userData.prevMessage,
-        },
-      }),
-    });
-  };
-
-  const clearChatHistory = async (userData: any) => {
-    return await fetch("/api/clear", {
-      method: "POST",
-      body: JSON.stringify({
-        Body: {
-          userId: userData.userId,
-        },
-      }),
-    });
-  };
-
-  // Mutations
-  const getAgentReplyMutation = useMutation(getAgentReply);
-  const clearChatHistoryMutation = useMutation(clearChatHistory);
-
-  const [empathy, setEmpathy] = useState<string | null>(null);
-  const submit = async () => {
-    console.log("messages", messages);
-    const prevMessage = messages[messages.length - 1]?.text;
-    setMessages((prevMessages) => {
-      return [...prevMessages, createMessage(userInput, true)];
-    });
-
-    const userText = userInput;
-    setUserInput("");
-    const response = await getAgentReplyMutation.mutateAsync({
-      userId,
-      userText,
-      prevMessage: prevMessage,
-    });
-
-    handleScroll();
-
-    const { text, empathy } = await response.json();
-    if (empathy) {
-      setEmpathy(empathy);
-    }
-    setMessages((prevMessages) => {
-      return [...prevMessages, createMessage(text, false)];
-    });
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      void submit();
-    }
-  };
-
-  const handleClear = async () => {
-    setMessages([]);
-    const response = await clearChatHistoryMutation.mutateAsync({ userId });
-    const jsonblob = await response.json();
-    console.log("Clear Response", jsonblob);
-  };
-
-  const [loaded, setLoaded] = useState(false);
-  // the initial message
-  useEffect(() => {
-    if (loaded) {
-      return;
-    }
-
-    (async () => {
-      const response = await getAgentReplyMutation.mutateAsync({
-        userId,
-        userText: "Hi",
-      });
-
-      const { text } = await response.json();
-      setMessages([createMessage(text, false)]);
-    })();
-
-    setLoaded(true);
-  }, [getAgentReplyMutation, userId, loaded, setLoaded]);
+  const {
+    messages,
+    userInput,
+    handleKeyDown,
+    submit,
+    handleClear,
+    ref,
+  } = useMessages();
 
   return (
     <div className="grid h-full h-full grid-cols-7">
@@ -187,7 +72,7 @@ export default function Chat() {
             />
             <button
               disabled={!messages.length}
-              onClick={() => submit()}
+              onClick={submit}
               className={classNames("daisy-btn-primary daisy-btn")}
             >
               Run
@@ -205,33 +90,3 @@ export default function Chat() {
     </div>
   );
 }
-
-export const UserMessage = ({ msg }: { msg: Message }) => {
-  return (
-    <div className="flex items-center space-x-8 py-10 px-40 text-xl">
-      <div className="daisy-placeholder daisy-avatar">
-        <div className="daisy-mask daisy-mask-square w-8 bg-primary text-3xl font-black text-accent">
-          {""}
-        </div>
-      </div>
-      <p>{msg.text}</p>
-    </div>
-  );
-};
-
-export const BotMessage = ({ msg }: { msg: Message }) => {
-  return (
-    <div className="flex items-center space-x-8 border-y-2 bg-base-300 py-10 px-40 text-xl">
-      <div className="daisy-placeholder daisy-avatar">
-        <div className="daisy-mask daisy-mask-square w-8 bg-secondary text-3xl font-black text-accent"></div>
-      </div>
-      <div className={classNames("rounded-md text-xl text-base-content")}>
-        {msg.text?.length ? (
-          msg.text.trim()
-        ) : (
-          <span className="">Loading...</span>
-        )}
-      </div>
-    </div>
-  );
-};

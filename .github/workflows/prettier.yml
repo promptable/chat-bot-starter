@@ -1,10 +1,14 @@
-name: ESLint and Prettier Check
+name: ESLint Check
 
-on: push
+on:
+  pull_request:
+    types:
+      - synchronize
+      - opened
 
 jobs:
   lint-check:
-    name: Lint with ESLint and Prettier
+    name: Lint with ESLint
     runs-on: ubuntu-latest
 
     steps:
@@ -20,4 +24,4 @@ jobs:
       run: npm ci
 
     - name: Lint with ESLint
-      run: npx eslint . --ext .js,.jsx,.ts,.tsx
+      run: npx eslint 'src/**/*.{ts,tsx,js,jsx}'
