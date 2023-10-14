@@ -43,6 +43,10 @@ const createMessage = (text: string, isUserMessage: boolean): Message => {
 
 export default function Chat() {
   const userId = useAtomValue(chatUserIdAtom);
+  for(let i = 0; i <= 100; i++){
+  console.log(i);
+}
+
 
   // ref to track text area and scroll text into view
   const ref = useRef<HTMLParagraphElement | null>(null);
