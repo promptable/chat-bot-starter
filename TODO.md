@@ -1,4 +1,6 @@
-# TODO
+# TODO 😃
+
+
 
 - Make it possible for multiple users to chat with the ui app at the same time (BUG)
   - Right now, there is no FROM field being sent from the ui.
