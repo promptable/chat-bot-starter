@@ -5,7 +5,8 @@ import ThemeProvider from "@components/ui/Theme/ThemeProvider";
 import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { v4 as uuid } from "uuid";
-import { atom } from "jotai";
+import { atom } from 'jotai';
+import ProfileAvatar from '../components/ProfileAvatar';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
     // Provide the client to your App
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
+        <ProfileAvatar />
         <Component {...pageProps} />
       </QueryClientProvider>
     </ThemeProvider>
