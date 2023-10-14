@@ -2,6 +2,7 @@
 
 import { type AppType } from "next/app";
 import ThemeProvider from "@components/ui/Theme/ThemeProvider";
+import Stopwatch from "@components/ui/Stopwatch/Stopwatch"; // New import
 import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { v4 as uuid } from "uuid";
@@ -17,6 +18,7 @@ const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
     // Provide the client to your App
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
+        <Stopwatch /> {/* New utilization */}
         <Component {...pageProps} />
       </QueryClientProvider>
     </ThemeProvider>
@@ -24,3 +26,4 @@ const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
 };
 
 export default MyApp;
+
